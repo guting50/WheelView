@@ -64,7 +64,7 @@ public class TimeSelectorUtils {
 
 
     public TimeSelectorUtils(Context context, YMDCallBack ymdCallBack, Date defaultDate) {
-        this(context, "yyyy-MM-dd HH:mm:ss", ymdCallBack, new Date());
+        this(context, "yyyy-MM-dd HH:mm:ss", ymdCallBack, defaultDate);
     }
 
     public TimeSelectorUtils(Context context, String format, YMDCallBack ymdCallBack, Date defaultDate) {
