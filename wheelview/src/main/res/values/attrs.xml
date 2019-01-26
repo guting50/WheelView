@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="WheelView">
+        <attr name="awv_centerTextColor" format="color" />
+        <attr name="awv_outerTextColor" format="color" />
+        <attr name="awv_centerTextSize" format="dimension" />
+        <attr name="awv_outerTextSize" format="dimension" />
+        <attr name="awv_dividerTextColor" format="color" />
+        <attr name="awv_itemsVisibleCount" format="integer" />
+        <attr name="awv_isLoop" format="boolean" />
+    </declare-styleable>
+
+</resources>
