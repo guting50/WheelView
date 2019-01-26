@@ -1,6 +1,6 @@
 package com.gt.wheelview.use;
 
-import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,23 +51,23 @@ public class TimeSelectorUtils {
     private ArrayList<String> hourList;
     private ArrayList<String> minuteList;
 
-    private Activity context;
+    private Context context;
     private String format = "yyyy-MM-dd HH:mm:ss";
 
-    public TimeSelectorUtils(Activity context, YMDCallBack ymdCallBack) {
+    public TimeSelectorUtils(Context context, YMDCallBack ymdCallBack) {
         this(context, "yyyy-MM-dd HH:mm:ss", ymdCallBack, new Date());
     }
 
-    public TimeSelectorUtils(Activity context, String format, YMDCallBack ymdCallBack) {
+    public TimeSelectorUtils(Context context, String format, YMDCallBack ymdCallBack) {
         this(context, format, ymdCallBack, new Date());
     }
 
 
-    public TimeSelectorUtils(Activity context, YMDCallBack ymdCallBack, Date defaultDate) {
+    public TimeSelectorUtils(Context context, YMDCallBack ymdCallBack, Date defaultDate) {
         this(context, "yyyy-MM-dd HH:mm:ss", ymdCallBack, new Date());
     }
 
-    public TimeSelectorUtils(Activity context, String format, YMDCallBack ymdCallBack, Date defaultDate) {
+    public TimeSelectorUtils(Context context, String format, YMDCallBack ymdCallBack, Date defaultDate) {
         this.context = context;
         this.format = format;
         this.ymdCallBack = ymdCallBack;
