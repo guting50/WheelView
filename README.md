@@ -119,6 +119,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 app:awv_centerTextSize="15sp"
+                app:awv_isLoop="false"
                 app:awv_outerTextSize="15sp" />
 
             <com.gt.wheelview.LoopView
@@ -128,6 +129,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 app:awv_centerTextSize="15sp"
+                app:awv_isLoop="false"
                 app:awv_outerTextSize="15sp" />
 
             <com.gt.wheelview.LoopView
@@ -137,6 +139,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 app:awv_centerTextSize="15sp"
+                app:awv_isLoop="false"
                 app:awv_outerTextSize="15sp" />
 
             <com.gt.wheelview.LoopView
@@ -146,6 +149,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 app:awv_centerTextSize="15sp"
+                app:awv_isLoop="false"
                 app:awv_outerTextSize="15sp" />
 
             <com.gt.wheelview.LoopView
@@ -155,8 +159,47 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 app:awv_centerTextSize="15sp"
-                app:awv_outerTextSize="15sp"/>
+                app:awv_isLoop="false"
+                app:awv_outerTextSize="15sp" />
         </LinearLayout>
 
     </LinearLayout>
+```
+##### LoopView的使用
+###### 自定义属性
+```Xml
+    <declare-styleable name="WheelView">
+        <attr name="awv_centerTextColor" format="color" /> <!--当前选中项的字体颜色-->
+        <attr name="awv_outerTextColor" format="color" /> <!--未选中项的字体颜色-->
+        <attr name="awv_centerTextSize" format="dimension" /><!--当前选中项的字体大小-->
+        <attr name="awv_outerTextSize" format="dimension" /><!--未选中项的字体大小-->
+        <attr name="awv_dividerTextColor" format="color" /><!--中间分割线的颜色-->
+        <attr name="awv_itemsVisibleCount" format="integer" /><!--可见项目的数量-->
+        <attr name="awv_isLoop" format="boolean" /><!--是否循环滚动 默认为true-->
+    </declare-styleable>
+```
+###### 布局中使用
+```Xml
+    <com.gt.wheelview.LoopView
+        android:id="@+id/loop_day"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        app:awv_centerTextSize="15sp"
+        app:awv_isLoop="false"
+        app:awv_outerTextSize="15sp" />
+```
+###### 代码中使用
+设置数据
+```Java
+ void setItems(List<String> items);
+```
+设置默认选中项
+```Java
+ void setInitPosition(int initPosition);
+```
+获取选中项
+```Java
+ int getSelectedItem();
 ```
