@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.gt.wheelview.use.TimeSelectorUtils;
 
+import java.util.Date;
+
 public class MainActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -17,7 +19,14 @@ public class MainActivity extends Activity {
         findViewById(R.id.rootView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TimeSelectorUtils(MainActivity.this, new TimeSelectorUtils.YMDCallBack() {
+                Date data = new Date();
+//                try {
+//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                    data = sdf.parse("2020-1-3 12:15:00");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+                new TimeSelectorUtils(MainActivity.this, data, new TimeSelectorUtils.YMDCallBack() {
                     @Override
                     public void setDate(PopupWindow popupWindow, String date) {
                         Toast.makeText(MainActivity.this, date, Toast.LENGTH_LONG).show();

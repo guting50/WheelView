@@ -143,7 +143,7 @@ public class TimeSelectorUtils {
             monthList.add((i < 9 ? "0" : "") + (i + 1) + "月");
         }
         monthLoopView.setItems(monthList);
-        setDaysList(minStartYear, minStartMonth);
+        setDaysList(currentYear, minStartMonth);
 
         //设置小时数据
         for (int i = 0; i <= 23; i++) {
@@ -167,36 +167,19 @@ public class TimeSelectorUtils {
         }
         minuteLoopView.setItems(minuteList);
 
-        /*设置初始显示的位置*/
-        yearLoopView.setInitPosition(yearList.indexOf(defaultStartYear + ""));
-        monthLoopView.setInitPosition(monthList.indexOf((defaultStartMonth < 9 ? "0" : "") + (defaultStartMonth + 1) + "月"));
-        dayLoopView.setInitPosition(dayList.indexOf((defaultStartDay < 10 ? "0" : "") + defaultStartDay + "日"));
-        hourLoopView.setInitPosition(hourList.indexOf((defaultStartHour < 10 ? "0" : "") + defaultStartHour + "时"));
-        minuteLoopView.setInitPosition(minuteList.indexOf((defaultStartMinute < 10 ? "0" : "") + defaultStartMinute + "分"));
-
         yearLoopView.setListener(new LoopItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
                 int currentMonth;
                 currentYear = minStartYear + index;
+                monthList.clear();
+                //设置月份数据 此数据是死数据 不变化
                 /**如果当前的时间是当前所在的年份*/
-                if (index == 0) {
-                    monthList.clear();
-                    //设置月份数据 此数据是死数据 不变化
-                    for (int i = minStartMonth; i <= 11; i++) {
-                        monthList.add(i + 1 + "月");
-                    }
-                    monthLoopView.setItems(monthList);
-                    currentMonth = minStartMonth + monthLoopView.getSelectedItem();
-                } else {
-                    monthList.clear();
-                    //设置月份数据 此数据是死数据 不变化
-                    for (int i = 1; i <= 12; i++) {
-                        monthList.add(i + "月");
-                    }
-                    monthLoopView.setItems(monthList);
-                    currentMonth = monthLoopView.getSelectedItem();
+                for (int i = index == 0 ? minStartMonth : 0; i <= 11; i++) {
+                    monthList.add((i < 9 ? "0" : "") + (i + 1) + "月");
                 }
+                monthLoopView.setItems(monthList);
+                currentMonth = minStartMonth + monthLoopView.getSelectedItem();
                 setDaysList(currentYear, currentMonth);
             }
         });
@@ -212,6 +195,12 @@ public class TimeSelectorUtils {
                 setDaysList(currentYear, currentMonth);
             }
         });
+        /*设置初始显示的位置*/
+        yearLoopView.setInitPosition(yearList.indexOf(defaultStartYear + ""));
+        monthLoopView.setInitPosition(monthList.indexOf((defaultStartMonth < 9 ? "0" : "") + (defaultStartMonth + 1) + "月"));
+        dayLoopView.setInitPosition(dayList.indexOf((defaultStartDay < 10 ? "0" : "") + defaultStartDay + "日"));
+        hourLoopView.setInitPosition(hourList.indexOf((defaultStartHour < 10 ? "0" : "") + defaultStartHour + "时"));
+        minuteLoopView.setInitPosition(minuteList.indexOf((defaultStartMinute < 10 ? "0" : "") + defaultStartMinute + "分"));
 
         tv_sure.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,14 +330,8 @@ public class TimeSelectorUtils {
         } else {
             totalDays = getDays(false, currentMonth);
         }
-        if (minStartYear == currentYear && minStartMonth == currentMonth) {
-            for (int i = minStartDay; i <= totalDays; i++) {
-                cacheList.add(i + "日");
-            }
-        } else {
-            for (int i = 1; i <= totalDays; i++) {
-                cacheList.add(i + "日");
-            }
+        for (int i = (minStartYear == currentYear && minStartMonth == currentMonth) ? minStartDay : 1; i <= totalDays; i++) {
+            cacheList.add((i < 9 ? "0" : "") + i + "日");
         }
         dayList.clear();
         dayList.addAll(cacheList);
