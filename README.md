@@ -31,6 +31,10 @@
      */
     public TimeSelectorUtils(Context context, Date minDate, Date defaultDate, int endYear, String resultFormat, int minInterval, YMDCallBack ymdCallBack)；
 ```
+###### 设置点击外面是否关闭
+```Java
+    void setOutsideTouchable(boolean outsideTouchable)
+```
 ###### 使用
 ```Jafa
     new TimeSelectorUtils(MainActivity.this, new TimeSelectorUtils.YMDCallBack() {
@@ -41,4 +45,118 @@
         }
     }).getYmdPop().showAsDropDown(view);
 ```
-可以设置需要显示的默认时间，可以设置回显得时间格式，默认不能选择今天以前的日期，后期优化。
+###### 布局文件 pop_ymdpicker.xml
+如果想修改布局，可以新建一个同名的布局文件，注意：文件名和布局中的id都不要变
+```Xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#90000000"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view_cancle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_cancle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:text="取消"
+                    android:textColor="#999999"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_sure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:text="确定"
+                    android:textColor="#008577"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <com.gt.wheelview.LoopView
+                android:id="@+id/loop_year"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:awv_centerTextSize="15sp"
+                app:awv_outerTextSize="15sp" />
+
+            <com.gt.wheelview.LoopView
+                android:id="@+id/loop_month"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:awv_centerTextSize="15sp"
+                app:awv_outerTextSize="15sp" />
+
+            <com.gt.wheelview.LoopView
+                android:id="@+id/loop_day"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:awv_centerTextSize="15sp"
+                app:awv_outerTextSize="15sp" />
+
+            <com.gt.wheelview.LoopView
+                android:id="@+id/loop_hour"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:awv_centerTextSize="15sp"
+                app:awv_outerTextSize="15sp" />
+
+            <com.gt.wheelview.LoopView
+                android:id="@+id/loop_minute"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:awv_centerTextSize="15sp"
+                app:awv_outerTextSize="15sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+```
