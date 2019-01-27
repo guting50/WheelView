@@ -2,13 +2,13 @@
 <resources>
 
     <declare-styleable name="WheelView">
-        <attr name="awv_centerTextColor" format="color" />
-        <attr name="awv_outerTextColor" format="color" />
-        <attr name="awv_centerTextSize" format="dimension" />
-        <attr name="awv_outerTextSize" format="dimension" />
-        <attr name="awv_dividerTextColor" format="color" />
-        <attr name="awv_itemsVisibleCount" format="integer" />
-        <attr name="awv_isLoop" format="boolean" />
+        <attr name="awv_centerTextColor" format="color" /> <!--当前选中项的字体颜色-->
+        <attr name="awv_outerTextColor" format="color" /> <!--未选中项的字体颜色-->
+        <attr name="awv_centerTextSize" format="dimension" /><!--当前选中项的字体大小-->
+        <attr name="awv_outerTextSize" format="dimension" /><!--未选中项的字体大小-->
+        <attr name="awv_dividerTextColor" format="color" /><!--中间分割线的颜色-->
+        <attr name="awv_itemsVisibleCount" format="integer" /><!--可见项目的数量-->
+        <attr name="awv_isLoop" format="boolean" /><!--是否循环滚动 默认为true-->
     </declare-styleable>
 
 </resources>

@@ -69,6 +69,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             app:awv_centerTextSize="15sp"
+            app:awv_isLoop="false"
             app:awv_outerTextSize="15sp" />
 
         <com.gt.wheelview.LoopView
@@ -78,6 +79,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             app:awv_centerTextSize="15sp"
+            app:awv_isLoop="false"
             app:awv_outerTextSize="15sp" />
 
         <com.gt.wheelview.LoopView
@@ -87,6 +89,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             app:awv_centerTextSize="15sp"
+            app:awv_isLoop="false"
             app:awv_outerTextSize="15sp" />
 
         <com.gt.wheelview.LoopView
@@ -96,6 +99,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             app:awv_centerTextSize="15sp"
+            app:awv_isLoop="false"
             app:awv_outerTextSize="15sp" />
 
         <com.gt.wheelview.LoopView
@@ -105,7 +109,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             app:awv_centerTextSize="15sp"
-            app:awv_outerTextSize="15sp"/>
+            app:awv_isLoop="false"
+            app:awv_outerTextSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>

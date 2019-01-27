@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
                     @Override
                     public void setDate(PopupWindow popupWindow, String date) {
                         Toast.makeText(MainActivity.this, date, Toast.LENGTH_LONG).show();
+                        popupWindow.dismiss();
                     }
                 }).getYmdPop().showAsDropDown(findViewById(R.id.rootView));
             }

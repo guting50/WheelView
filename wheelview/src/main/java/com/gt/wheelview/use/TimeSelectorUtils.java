@@ -21,6 +21,8 @@ public class TimeSelectorUtils {
 
     private PopupWindow birthPop;
     private View popView;
+    private View blankView;
+    private boolean outsideTouchable = false;
 
     /*最小值*/
     private int minStartYear;
@@ -50,38 +52,64 @@ public class TimeSelectorUtils {
     private ArrayList<String> dayList;
     private ArrayList<String> hourList;
     private ArrayList<String> minuteList;
+    private int minInterval = 5;
 
     private Context context;
-    private String format = "yyyy-MM-dd HH:mm:ss";
+    private String resultFormat = "yyyy-MM-dd HH:mm:ss";
 
     public TimeSelectorUtils(Context context, YMDCallBack ymdCallBack) {
-        this(context, "yyyy-MM-dd HH:mm:ss", ymdCallBack, new Date());
+        this(context, "yyyy-MM-dd HH:mm:ss", new Date(), ymdCallBack);
     }
 
-    public TimeSelectorUtils(Context context, String format, YMDCallBack ymdCallBack) {
-        this(context, format, ymdCallBack, new Date());
+    public TimeSelectorUtils(Context context, String resultFormat, YMDCallBack ymdCallBack) {
+        this(context, resultFormat, new Date(), ymdCallBack);
     }
 
-
-    public TimeSelectorUtils(Context context, YMDCallBack ymdCallBack, Date defaultDate) {
-        this(context, "yyyy-MM-dd HH:mm:ss", ymdCallBack, defaultDate);
+    public TimeSelectorUtils(Context context, Date defaultDate, YMDCallBack ymdCallBack) {
+        this(context, "yyyy-MM-dd HH:mm:ss", defaultDate, ymdCallBack);
     }
 
-    public TimeSelectorUtils(Context context, String format, YMDCallBack ymdCallBack, Date defaultDate) {
+    public TimeSelectorUtils(Context context, String resultFormat, Date defaultDate, YMDCallBack ymdCallBack) {
+        this(context, new Date(), defaultDate, resultFormat, ymdCallBack);
+    }
+
+    public TimeSelectorUtils(Context context, Date minDate, Date defaultDate, String resultFormat, YMDCallBack ymdCallBack) {
+        this(context, minDate, defaultDate, 0, resultFormat, ymdCallBack);
+    }
+
+    public TimeSelectorUtils(Context context, Date minDate, Date defaultDate, int endYear, String resultFormat, YMDCallBack ymdCallBack) {
+        this(context, minDate, defaultDate, endYear, resultFormat, 5, ymdCallBack);
+    }
+
+    /**
+     * @param context
+     * @param minDate      最小可以选择的时间，默认不能选择今天以前的
+     * @param defaultDate  当前选中的时间，默认为今天
+     * @param endYear      最大可以选择的年份，比如2020年，默认比当前年大一年
+     * @param resultFormat 返回的时间格式，默认为 yyyy-MM-dd HH:mm:ss
+     * @param minInterval  分钟最小的间隔时间，默认为5分钟
+     * @param ymdCallBack  点击确定回调接口
+     */
+    public TimeSelectorUtils(Context context, Date minDate, Date defaultDate, int endYear, String resultFormat, int minInterval, YMDCallBack ymdCallBack) {
         this.context = context;
-        this.format = format;
+        this.resultFormat = resultFormat;
         this.ymdCallBack = ymdCallBack;
+        this.minInterval = minInterval;
         Calendar calendar = Calendar.getInstance();
-        minStartYear = calendar.get(Calendar.YEAR);
-        endYear = minStartYear + 1;
         currentYear = calendar.get(Calendar.YEAR);
+        if (endYear == 0) {
+            this.endYear = currentYear + 1;
+        } else {
+            this.endYear = endYear;
+        }
+        calendar.setTime(minDate);
+        minStartYear = calendar.get(Calendar.YEAR);
         minStartMonth = calendar.get(Calendar.MONTH);
         minStartDay = calendar.get(Calendar.DAY_OF_MONTH);
         minStartHour = calendar.get(Calendar.HOUR_OF_DAY);
         minStartMinute = calendar.get(Calendar.MINUTE);
         calendar.setTime(defaultDate);
         defaultStartYear = calendar.get(Calendar.YEAR);
-        endYear = defaultStartYear + 1;
         defaultStartMonth = calendar.get(Calendar.MONTH);
         defaultStartDay = calendar.get(Calendar.DAY_OF_MONTH);
         defaultStartHour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -91,6 +119,7 @@ public class TimeSelectorUtils {
 
     private void initYmdPop() {
         popView = LayoutInflater.from(context).inflate(R.layout.pop_ymdpicker, null);
+        blankView = popView.findViewById(R.id.view_cancle);
         tv_cancle = popView.findViewById(R.id.tv_cancle);
         yearLoopView = popView.findViewById(R.id.loop_year);
         monthLoopView = popView.findViewById(R.id.loop_month);
@@ -129,7 +158,7 @@ public class TimeSelectorUtils {
 
         //设置分钟数据
         for (int i = 0; i < 60; i++) {
-            if (i % 5 == 0) {
+            if (i % minInterval == 0) {
                 if (i < 10) {
                     minuteList.add("0" + i + "分");
                 } else {
@@ -140,18 +169,12 @@ public class TimeSelectorUtils {
         minuteLoopView.setItems(minuteList);
 
         /*设置初始显示的位置*/
-        yearLoopView.setInitPosition(yearList.indexOf(defaultStartYear));
+        yearLoopView.setInitPosition(yearList.indexOf(defaultStartYear + ""));
         monthLoopView.setInitPosition(monthList.indexOf((defaultStartMonth < 9 ? "0" : "") + (defaultStartMonth + 1) + "月"));
         dayLoopView.setInitPosition(dayList.indexOf((defaultStartDay < 10 ? "0" : "") + defaultStartDay + "日"));
         hourLoopView.setInitPosition(hourList.indexOf((defaultStartHour < 10 ? "0" : "") + defaultStartHour + "时"));
         minuteLoopView.setInitPosition(minuteList.indexOf((defaultStartMinute < 10 ? "0" : "") + defaultStartMinute + "分"));
-        /*================================================*/
-        yearLoopView.setNotLoop();
-        monthLoopView.setNotLoop();
-        dayLoopView.setNotLoop();
-        hourLoopView.setNotLoop();
-        minuteLoopView.setNotLoop();
-        /*================================================*/
+
         yearLoopView.setListener(new LoopItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
@@ -209,7 +232,7 @@ public class TimeSelectorUtils {
                                 .replace("分", ":");
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                         Date date = sdf.parse(birthDay);
-                        SimpleDateFormat sdf1 = new SimpleDateFormat(format);
+                        SimpleDateFormat sdf1 = new SimpleDateFormat(resultFormat);
                         ymdCallBack.setDate(birthPop, sdf1.format(date));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -224,6 +247,17 @@ public class TimeSelectorUtils {
                 birthPop.dismiss();
             }
         });
+        blankView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (outsideTouchable)
+                    birthPop.dismiss();
+            }
+        });
+    }
+
+    public void setOutsideTouchable(boolean outsideTouchable) {
+        this.outsideTouchable = outsideTouchable;
     }
 
     public PopupWindow getYmdPop() {
@@ -326,6 +360,6 @@ public class TimeSelectorUtils {
     private YMDCallBack ymdCallBack;
 
     public interface YMDCallBack {
-        public void setDate(PopupWindow popupWindow, String date);
+        void setDate(PopupWindow popupWindow, String date);
     }
 }
