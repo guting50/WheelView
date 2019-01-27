@@ -183,8 +183,8 @@
         <item name="android:windowEnterAnimation">@anim/pop_in</item>
         <item name="android:windowExitAnimation">@anim/pop_out</item>
     </style><declare-styleable name="WheelView">
-        <attr format="color" name="awv_centerTextColor"/>
-        <attr format="color" name="awv_outerTextColor"/>
+        <attr format="color" name="awv_centerTextColor"/> 
+        <attr format="color" name="awv_outerTextColor"/> 
         <attr format="dimension" name="awv_centerTextSize"/>
         <attr format="dimension" name="awv_outerTextSize"/>
         <attr format="color" name="awv_dividerTextColor"/>
@@ -2756,8 +2756,8 @@
         
         <attr name="android:tileMode"/>
     </declare-styleable><declare-styleable name="WheelView">
-        <attr format="color" name="awv_centerTextColor"/>
-        <attr format="color" name="awv_outerTextColor"/>
+        <attr format="color" name="awv_centerTextColor"/> 
+        <attr format="color" name="awv_outerTextColor"/> 
         <attr format="dimension" name="awv_centerTextSize"/>
         <attr format="dimension" name="awv_outerTextSize"/>
         <attr format="color" name="awv_dividerTextColor"/>

@@ -96,9 +96,8 @@ public class TimeSelectorUtils {
         this.ymdCallBack = ymdCallBack;
         this.minInterval = minInterval;
         Calendar calendar = Calendar.getInstance();
-        currentYear = calendar.get(Calendar.YEAR);
         if (endYear == 0) {
-            this.endYear = currentYear + 1;
+            this.endYear = calendar.get(Calendar.YEAR) + 1;
         } else {
             this.endYear = endYear;
         }
@@ -109,7 +108,7 @@ public class TimeSelectorUtils {
         minStartHour = calendar.get(Calendar.HOUR_OF_DAY);
         minStartMinute = calendar.get(Calendar.MINUTE);
         calendar.setTime(defaultDate);
-        defaultStartYear = calendar.get(Calendar.YEAR);
+        currentYear = defaultStartYear = calendar.get(Calendar.YEAR);
         defaultStartMonth = calendar.get(Calendar.MONTH);
         defaultStartDay = calendar.get(Calendar.DAY_OF_MONTH);
         defaultStartHour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -178,7 +177,7 @@ public class TimeSelectorUtils {
         yearLoopView.setListener(new LoopItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
-                int currentMonth = 0;
+                int currentMonth;
                 currentYear = minStartYear + index;
                 /**如果当前的时间是当前所在的年份*/
                 if (index == 0) {
@@ -210,7 +209,6 @@ public class TimeSelectorUtils {
                 } else {
                     currentMonth = index;
                 }
-                int currentYear = minStartYear + yearLoopView.getSelectedItem();
                 setDaysList(currentYear, currentMonth);
             }
         });
