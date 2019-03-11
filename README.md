@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/goodgt/WheelView.svg)](https://jitpack.io/#goodgt/WheelView)
+
 ## 防ios时间选择器
 #### 使用方法：
 #### 依赖
