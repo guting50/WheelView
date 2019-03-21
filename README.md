@@ -15,7 +15,7 @@
 然后，将库添加到模块中 build.gradle
 ```Xml
     dependencies {
-        implementation 'com.github.goodgt:WheelView:1.0.6'
+        implementation 'com.github.goodgt:WheelView:Tag'
     }
 ```
 #### 代码中使用
