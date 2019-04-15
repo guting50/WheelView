@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/goodgt/WheelView.svg)](https://jitpack.io/#goodgt/WheelView)
+[![](https://jitpack.io/v/guting50/WheelView.svg)](https://jitpack.io/#guting50/WheelView)
 
 ## 防ios时间选择器
 #### 使用方法：
@@ -15,7 +15,7 @@
 然后，将库添加到模块中 build.gradle
 ```Xml
     dependencies {
-        implementation 'com.github.goodgt:WheelView:Tag'
+        implementation 'com.github.guting50:WheelView:Tag'
     }
 ```
 #### 代码中使用
